@@ -32,13 +32,27 @@ Here are some tasks for you to work on:
 
 📘 Discussion Task
 
-Explore the code and make notes on the following features and how it is being implemented in the code. We'd like you to note down what classes and methods are used and how the objects interact.
+Explore the code and make notes on the following features and how it is being implemented in the code. 
+We'd like you to note down what classes and methods are used and how the objects interact.
 
 The features are:
 - Get All Books
+  - GET request with no endpoint
 - Get a Book by ID
+  - GET request with book id as endpoint
 - Add a Book
+  - POST request with book as body
 - Update a Book
+  - PUT request with book id as endpoint and with book as body
+
+All the above "enter" in the "BookManagerController" as either GET, POST or PUT requests with optional bookID parameter,
+or rather endpoint, and optional Book body.
+
+These are then processed by the "BookManagerServiceImpl" to access some back end repository and either update and / or
+return data from that repository. 
+
+The BookManagerController then packages the result as "ResponseEntity" to be returned to the user.  
+I can be assumed that this is a JSON body (representing the Book object), a status code and optional headers. 
 
 📘 Task 1: Implement the following User Story with tests.
 
