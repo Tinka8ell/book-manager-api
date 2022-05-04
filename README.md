@@ -37,16 +37,22 @@ We'd like you to note down what classes and methods are used and how the objects
 
 The features are:
 - Get All Books
-  - GET request with no endpoint
+  - GET request with no parameter
 - Get a Book by ID
-  - GET request with book id as endpoint
+  - GET request with book id as parameter
 - Add a Book
   - POST request with book as body
 - Update a Book
-  - PUT request with book id as endpoint and with book as body
+  - PUT request with book id as parameter and with book as body
 
-All the above "enter" in the "BookManagerController" as either GET, POST or PUT requests with optional bookID parameter,
-or rather endpoint, and optional Book body.
+Seriously do not like the "hidden" nature of so much of this.  I missed the "endpoint" definition the first
+time through as it was stuck up behind the class definition.  Only went looking for it when I saw the endpoint being 
+used in the test code and tried to work out why it was there.  Can only guess that the annotations are doing behind the 
+scenes in the Book Model class!  And there does not seem to be much of an actual repository as the Tests mock it anyway. 
+
+All the above "enter" in the "BookManagerController" as either GET, POST or PUT requests 
+with endpoint as "/api/v1/book" and an optional bookID parameter,
+and optional Book body.
 
 These are then processed by the "BookManagerServiceImpl" to access some back end repository and either update and / or
 return data from that repository. 
