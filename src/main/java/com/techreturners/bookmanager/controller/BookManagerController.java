@@ -39,8 +39,12 @@ public class BookManagerController {
     //User Story 4 - Update Book By Id Solution
     @PutMapping({"/{bookId}"})
     public ResponseEntity<Book> updateBookById(@PathVariable("bookId") Long bookId, @RequestBody Book book) {
-        bookManagerService.updateBookById(bookId, book);
-        return new ResponseEntity<>(bookManagerService.getBookById(bookId), HttpStatus.OK);
+        try {
+            bookManagerService.updateBookById(bookId, book);
+            return new ResponseEntity<>(bookManagerService.getBookById(bookId), HttpStatus.OK);
+        } catch (Error e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping({"/{bookId}"})
