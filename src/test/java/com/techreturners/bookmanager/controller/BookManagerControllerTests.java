@@ -121,4 +121,39 @@ public class BookManagerControllerTests {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @Test
+    public void testGetMappingGetMissingBookById() throws Exception {
+
+        Long bookId = 7L;
+
+        when(mockBookManagerServiceImpl.getBookById(bookId)).thenReturn(null);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.get("/api/v1/book/" + bookId))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    public void testPutMappingUpdateMissingBook() throws Exception {
+
+        Book book = new Book(4L, "Book Four", "This is the description for Book Four", "Person Four", Genre.Fantasy);
+
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.put("/api/v1/book/" + book.getId())
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(book)))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    public void testDeleteMappingDeleteMissingBookById() throws Exception {
+
+        Long bookId = 7L;
+        when(mockBookManagerServiceImpl.deleteBookById(bookId)).thenReturn(false);
+
+        this.mockMvcController
+                .perform(MockMvcRequestBuilders.delete("/api/v1/book/" + bookId))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
 }

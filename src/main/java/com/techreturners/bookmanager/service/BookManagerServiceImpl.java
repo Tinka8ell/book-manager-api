@@ -29,14 +29,17 @@ public class BookManagerServiceImpl implements BookManagerService {
 
     @Override
     public Book getBookById(Long id) {
-        return bookManagerRepository.findById(id).get();
+        Optional<Book> result = bookManagerRepository.findById(id);
+        if (result.isEmpty())
+            throw new Error("Book Id: " + id + " not found");
+
+        return result.get();
     }
 
     //User Story 4 - Update Book By Id Solution
     @Override
     public void updateBookById(Long id, Book book) {
-        Book retrievedBook = bookManagerRepository.findById(id).get();
-
+        Book retrievedBook = getBookById(id);
         retrievedBook.setTitle(book.getTitle());
         retrievedBook.setDescription(book.getDescription());
         retrievedBook.setAuthor(book.getAuthor());

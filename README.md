@@ -64,6 +64,10 @@ I can be assumed that this is a JSON body (representing the Book object), a stat
 
 `User Story: As a user, I want to use the Book Manager API to delete a book using its ID`
 
+### Implementation:
+* Task 1 added test
+* Added control mapping for delete
+
 
 📘 Extension Task: Oh no! 😭 We've only covered the happy paths in the solution, can you figure out a way
 to add in exception handling to the project? 
@@ -73,4 +77,6 @@ to add in exception handling to the project?
 
 - Clue 2: What if someone wants to find a book by an ID that doesn't yet exist? 
   How can we improve the API by handling errors gracefully and show a helpful message to the client?
-  
+
+### Implementation:  
+* Added tests for get, put and delete for missing bookId's
