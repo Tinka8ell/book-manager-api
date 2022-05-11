@@ -96,3 +96,6 @@ to add in exception handling to the project?
    - Got them back as list
    - Checked they were there after server restart
 4. Creating different application.properties files for various environments
+5. (Optional) Move password to environment variables
+   - Actually placed the property in the configuration file for the Application
+- 
