@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class BookManagerController {
         try {
             return new ResponseEntity<>(bookManagerService.getBookById(bookId), HttpStatus.OK);
         } catch (Error e){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
@@ -40,7 +41,7 @@ public class BookManagerController {
             httpHeaders.add("book", "/api/v1/book/" + newBook.getId().toString());
             return new ResponseEntity<>(newBook, httpHeaders, HttpStatus.CREATED);
         } catch (Error e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -51,7 +52,7 @@ public class BookManagerController {
             bookManagerService.updateBookById(bookId, book);
             return new ResponseEntity<>(bookManagerService.getBookById(bookId), HttpStatus.OK);
         } catch (Error e){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 

@@ -80,3 +80,19 @@ to add in exception handling to the project?
 
 ### Implementation:  
 * Added tests for get, put and delete for missing bookId's
+
+## API Interactive Lab 2 - Externalising Application Configuration &Connecting to a Real Database - MySQL Version
+
+1. Explore the Spring Boot INFO logs 
+  * See: No active profile set
+  * See: Using dialect: org.hibernate.dialect.H2Dialect
+2. Getting to know the application.properties file
+  * Found the exisitng properties
+3. Connecting your Minimalist Book Manager API to a MySQL Database 
+   - Added the MySQL Dependency to POM
+   - Added the Database Connection String to the application.properties file
+   - Dropped the existing Book table and created by Spring ....
+   - Added books
+   - Got them back as list
+   - Checked they were there after server restart
+4. Creating different application.properties files for various environments
