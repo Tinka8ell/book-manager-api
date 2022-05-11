@@ -24,6 +24,9 @@ public class BookManagerServiceImpl implements BookManagerService {
 
     @Override
     public Book insertBook(Book book) {
+        Optional<Book> test = bookManagerRepository.findById(book.getId());
+        if (test.isPresent())
+            throw new Error("Book Id: " + book.getId() + " already exists");
         return bookManagerRepository.save(book);
     }
 
