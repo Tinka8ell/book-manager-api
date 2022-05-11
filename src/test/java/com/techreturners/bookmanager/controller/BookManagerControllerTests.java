@@ -126,7 +126,7 @@ public class BookManagerControllerTests {
 
         Long bookId = 7L;
 
-        when(mockBookManagerServiceImpl.getBookById(bookId)).thenReturn(null);
+        when(mockBookManagerServiceImpl.getBookById(bookId)).thenThrow(new Error("Test"));
 
         this.mockMvcController.perform(
                         MockMvcRequestBuilders.get("/api/v1/book/" + bookId))
@@ -137,6 +137,8 @@ public class BookManagerControllerTests {
     public void testPutMappingUpdateMissingBook() throws Exception {
 
         Book book = new Book(4L, "Book Four", "This is the description for Book Four", "Person Four", Genre.Fantasy);
+
+        when(mockBookManagerServiceImpl.getBookById(book.getId())).thenThrow(new Error("Test"));
 
         this.mockMvcController.perform(
                         MockMvcRequestBuilders.put("/api/v1/book/" + book.getId())
@@ -149,11 +151,11 @@ public class BookManagerControllerTests {
     public void testDeleteMappingDeleteMissingBookById() throws Exception {
 
         Long bookId = 7L;
-        when(mockBookManagerServiceImpl.deleteBookById(bookId)).thenReturn(false);
+        when(mockBookManagerServiceImpl.getBookById(bookId)).thenThrow(new Error("Test"));
 
         this.mockMvcController
                 .perform(MockMvcRequestBuilders.delete("/api/v1/book/" + bookId))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 }
